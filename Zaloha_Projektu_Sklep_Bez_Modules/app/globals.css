@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+/* ============================================================
+   SKLEP U DVOŘÁKŮ — LUXURY DARK PALETTE
+   Moravian Winery, Hustopeče
+   ============================================================ */
+
+@theme {
+  /* --- Core Brand Colors --- */
+  --color-burgundy:        #4A0E1A; /* Deep Burgundy — primary brand */
+  --color-burgundy-light:  #7A1E30; /* Mid Burgundy — hover/accent */
+  --color-burgundy-muted:  #2E0910; /* Near-Black Burgundy — depths */
+
+  --color-gold:            #C9A84C; /* Warm Gold — primary accent */
+  --color-gold-light:      #E0C97A; /* Champagne Gold — highlights */
+  --color-gold-muted:      #8A6E2E; /* Antique Gold — subtle text */
+
+  --color-charcoal:        #4A0404; /* Charcoal — page background */
+  --color-charcoal-mid:    #4A0404; /* Lifted Charcoal — cards */
+  --color-charcoal-light:  #2F2F2F; /* Surface Charcoal — borders */
+
+  --color-cream:           #F5ECD7; /* Warm Cream — primary text */
+  --color-cream-muted:     #C8B99A; /* Muted Cream — secondary text */
+  --color-cream-faint:     #3D3530; /* Faint Cream — subtle dividers */
+
+  /* --- Typography Scale --- */
+  --font-display:  'Cinzel', Georgia, serif;
+  --font-body:     'DM Sans', system-ui, sans-serif;
+
+  /* --- Spacing / Radius --- */
+  --radius-sm:   2px;
+  --radius-md:   6px;
+  --radius-lg:   12px;
+
+  /* --- Transitions --- */
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-reveal:  cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* ============================================================
+   LENIS SMOOTH SCROLL — CRITICAL SETUP
+   ============================================================ */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ============================================================
+   GLOBAL RESET & BASE STYLES
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-charcoal);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   LUXURY SELECTION COLORS
+   ============================================================ */
+
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-charcoal);
+}
+
+::-moz-selection {
+  background-color: var(--color-gold);
+  color: var(--color-charcoal);
+}
+
+/* ============================================================
+   SCROLLBAR STYLING (webkit)
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-charcoal);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-muted);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+/* ============================================================
+   TYPOGRAPHY — GLOBAL DEFAULTS
+   ============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  color: var(--color-cream);
+}
+
+p {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--color-cream-muted);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s var(--ease-luxury);
+}
+
+a:hover {
+  color: var(--color-gold);
+}
+
+strong, b {
+  font-weight: 500;
+  color: var(--color-cream);
+}
+
+/* ============================================================
+   UTILITY: GOLD GRADIENT TEXT
+   ============================================================ */
+
+.text-gold-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-gold-light) 0%,
+    var(--color-gold) 50%,
+    var(--color-gold-muted) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================================
+   UTILITY: NOISE TEXTURE OVERLAY
+   A subtle grain to add depth and luxury feel
+   ============================================================ */
+
+.noise-overlay::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: overlay;
+}
+
+/* ============================================================
+   UTILITY: WINE LINE DIVIDER
+   ============================================================ */
+
+.divider-gold {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-gold),
+    transparent
+  );
+  margin: 0 auto;
+}
+
+/* ============================================================
+   HERO: VIDEO SWAP READY
+   When replacing image with video, target:
+     <div ref={bgRef}> → add <video> with same classes as <img>
+   autoPlay muted loop playsInline
+   ============================================================ */
+
+/* ============================================================
+   GSAP: DEFAULT HIDDEN STATE FOR REVEALS
+   ============================================================ */
+
+[data-gsap-fade] {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+[data-gsap-fade-left] {
+  opacity: 0;
+  transform: translateX(-32px);
+}
+
+[data-gsap-fade-right] {
+  opacity: 0;
+  transform: translateX(32px);
+}
